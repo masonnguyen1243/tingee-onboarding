@@ -24,10 +24,10 @@ Mỗi phase làm tuần tự, một task một lần. Sau mỗi task: cập nh�
 - [x] Áp đúng logo + mã màu brand của 4 đối tác (Tingee, Bảo Kim, OnePay, Payoo)
 
 ## Phase 3: Core Data Logic (mô hình nội dung)
-- [ ] Định nghĩa cấu trúc dữ liệu nội dung trong JS (vd `js/data.js`): danh sách đối tác → các section → heading/anchor
-- [ ] Mỗi mục có `id` (anchor), `title`, `partner`, và nội dung (placeholder rõ ràng nếu chưa có nội dung thật)
-- [ ] Tách dữ liệu khỏi markup để dễ cập nhật nội dung sau này
-- [ ] Chuẩn hoá cách sinh `id`/anchor để dùng chung cho sidebar, nội dung và TOC
+- [x] Định nghĩa cấu trúc dữ liệu nội dung trong JS (vd `js/data.js`): danh sách đối tác → các section → heading/anchor
+- [x] Mỗi mục có `id` (anchor), `title`, `partner`, và nội dung (placeholder rõ ràng nếu chưa có nội dung thật)
+- [x] Tách dữ liệu khỏi markup để dễ cập nhật nội dung sau này
+- [x] Chuẩn hoá cách sinh `id`/anchor để dùng chung cho sidebar, nội dung và TOC
 - [ ] (Khi có) thay placeholder bằng nội dung thật do chủ dự án cung cấp
 
 ## Phase 4: Connect UI to Data (render từ dữ liệu)

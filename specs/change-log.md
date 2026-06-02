@@ -32,6 +32,14 @@
 ### Fixed
 - QA Header: gỡ `console.log("Phase 1 setup OK")` trong `js/main.js` (thông điệp đã lỗi thời sau khi sang Phase 2, gây nhiễu khi review console). Không còn log thừa khi load trang.
 
+### Phase 3 — Core Data Logic
+- Tạo `src/js/data.js`: khai báo `DOCS.partners[]` — 4 đối tác (Tingee, Bảo Kim, OnePay, Payoo) mỗi đối tác có `id`, `name`, `logo`, `label`, và `sections[]`.
+- Mỗi `section` gồm: `id` (anchor chuẩn hoá), `partner`, `navTitle` (text sidebar), `pageTitle` (H1 nội dung), `content` (null nếu đã có trong HTML, `'[NỘI DUNG CHỜ CẬP NHẬT]'` nếu chưa), và `headings[]` (các H2 con dùng cho TOC).
+- Chuẩn hoá ID qua helper `makeId(partnerSlug, sectionSlug)` → `'{partner}-{slug}'`; dùng chung cho sidebar, nội dung và TOC.
+- Tất cả anchor ID trong `data.js` khớp chính xác với các `id` đang dùng trong `index.html` (không đổi HTML).
+- Nạp `data.js` vào `index.html` trước `main.js`; `DOCS` sẵn sàng cho Phase 4 render từ dữ liệu.
+- Tingee có nội dung thật (`content: null` — đang dùng HTML tĩnh); Bảo Kim/OnePay/Payoo dùng placeholder rõ ràng, chờ chủ dự án cung cấp.
+
 ### Notes
 - QA Header vs acceptance criteria: PASS các tiêu chí liên quan (header hiện logo+tên trang, màu `#e12a41`, font tiếng Việt đúng dấu, responsive, không lỗi console). Logo Tingee vẫn là placeholder (open item). `<h1>` và màu link active để dành cho task nội dung/sidebar sau — không thêm ở task này.
 - Đã hoàn tất Phase 1 (Project Setup) và Phase 2 task 1–2. Bước tiếp theo: Phase 2 task 3 (Sidebar điều hướng markup tĩnh).
