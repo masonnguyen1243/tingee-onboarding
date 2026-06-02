@@ -35,28 +35,32 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body class="font-sans text-slate-800 antialiased">
+<body class="font-sans text-slate-800 antialiased bg-slate-50">
   <!--
-    Phase 1 — Project Setup.
-    Trang này chỉ để xác nhận môi trường đã sẵn sàng (Tailwind, font, màu, icon).
-    Chưa có business feature (sidebar / nội dung / TOC) — sẽ làm ở Phase 2 trở đi.
+    Phase 2 (task 1) — Header: logo Tingee + tên trang.
+    Layout 3 cột / sidebar / nội dung / TOC sẽ làm ở các task sau.
   -->
-  <main class="min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-md w-full text-center space-y-4">
-      <div
-        class="mx-auto w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center"
-      >
-        <i data-lucide="check-circle-2" class="w-7 h-7"></i>
-      </div>
-      <h1 class="text-2xl font-semibold">Tingee Onboarding Docs</h1>
-      <p class="text-slate-500">
-        Project setup (Phase 1) hoàn tất — Tailwind, font tiếng Việt, màu chính
-        <span class="font-medium text-primary">#e12a41</span> và icon đã nạp.
-      </p>
-      <p class="text-sm text-slate-400">
-        Nội dung tài liệu sẽ được thêm từ Phase 2.
-      </p>
+  <header class="sticky top-0 z-30 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-3">
+      <!--
+        LOGO TINGEE — PLACEHOLDER.
+        Thay monogram bên dưới bằng file logo chính thức (SVG/PNG) khi có asset thật.
+      -->
+      <a href="#" class="flex items-center gap-2.5" aria-label="Tingee — Trang tài liệu onboarding">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-white font-bold leading-none">
+          T
+        </span>
+        <span class="text-lg font-bold text-slate-900">Tingee</span>
+      </a>
+      <span class="hidden sm:block w-px h-6 bg-slate-200" aria-hidden="true"></span>
+      <span class="hidden sm:block text-slate-500 font-medium">Onboarding Docs</span>
     </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <p class="text-slate-400">
+      [NỘI DUNG CHỜ CẬP NHẬT] — layout 3 cột và nội dung tài liệu sẽ được thêm ở các task tiếp theo của Phase 2.
+    </p>
   </main>
 
   <!-- Icon: Lucide -->

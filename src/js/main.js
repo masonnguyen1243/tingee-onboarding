@@ -1,5 +1,4 @@
-// Phase 1 — khởi tạo cơ bản.
-// Chưa có business logic; chỉ render icon Lucide và log xác nhận setup.
+// Khởi tạo cơ bản. Chưa có business logic; chỉ render icon Lucide nếu có.
 (function () {
   "use strict";
 
@@ -7,6 +6,4 @@
   if (window.lucide && typeof window.lucide.createIcons === "function") {
     window.lucide.createIcons();
   }
-
-  console.log("[Tingee Docs] Phase 1 setup OK");
 })();

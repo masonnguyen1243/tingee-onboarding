@@ -19,9 +19,14 @@
 - Nạp icon Lucide qua CDN; `js/main.js` gọi `lucide.createIcons()` + log xác nhận.
 - `index.html` chỉ là trang xác nhận setup, **chưa có business feature** (sidebar/nội dung/TOC sẽ làm từ Phase 2).
 
+### Phase 2 — Core UI
+- Task 1 (Header): thêm header sticky vào `src/index.html` gồm logo Tingee (**placeholder** monogram, kèm comment để thay logo chính thức) + tên trang "Onboarding Docs". Dùng màu `primary #e12a41` cho monogram; tên trang ẩn trên màn hình nhỏ (responsive cơ bản). Thay trang xác nhận setup của Phase 1 bằng header + vùng nội dung placeholder.
+
 ### Fixed
-- (chưa có)
+- QA Header: gỡ `console.log("Phase 1 setup OK")` trong `js/main.js` (thông điệp đã lỗi thời sau khi sang Phase 2, gây nhiễu khi review console). Không còn log thừa khi load trang.
 
 ### Notes
-- Đã hoàn tất Phase 1 (Project Setup). Bước tiếp theo: Phase 2 (Core UI — header, layout 3 cột, sidebar, responsive).
+- QA Header vs acceptance criteria: PASS các tiêu chí liên quan (header hiện logo+tên trang, màu `#e12a41`, font tiếng Việt đúng dấu, responsive, không lỗi console). Logo Tingee vẫn là placeholder (open item). `<h1>` và màu link active để dành cho task nội dung/sidebar sau — không thêm ở task này.
+- Đã hoàn tất Phase 1 (Project Setup) và Phase 2 task 1 (Header). Bước tiếp theo: Phase 2 task 2 (layout 3 cột: sidebar + nội dung + TOC).
+- Logo Tingee hiện là placeholder — cần file logo chính thức (SVG/PNG) để thay.
 - Cần chủ dự án cung cấp: nội dung tài liệu hướng dẫn chi tiết + logo/mã màu brand chính xác của Tingee, Bảo Kim, OnePay, Payoo.

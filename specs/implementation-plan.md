@@ -7,15 +7,15 @@ Mỗi phase làm tuần tự, một task một lần. Sau mỗi task: cập nh�
 ---
 
 ## Phase 1: Project Setup
-- [ ] Tạo cấu trúc thư mục `src/` (`index.html`, `css/`, `js/`, `assets/`)
-- [ ] Thêm TailwindCSS qua CDN (đủ cho MVP, không cần build step)
-- [ ] Nạp font hỗ trợ tiếng Việt (Be Vietnam Pro / Inter) qua Google Fonts
-- [ ] Khai báo màu chính `#e12a41` trong cấu hình Tailwind + biến CSS
-- [ ] Nạp bộ icon (Lucide hoặc Heroicons)
-- [ ] Tạo `index.html` rỗng và xác nhận mở được trên trình duyệt, không lỗi console
+- [x] Tạo cấu trúc thư mục `src/` (`index.html`, `css/`, `js/`, `assets/`)
+- [x] Thêm TailwindCSS qua CDN (đủ cho MVP, không cần build step)
+- [x] Nạp font hỗ trợ tiếng Việt (Be Vietnam Pro / Inter) qua Google Fonts
+- [x] Khai báo màu chính `#e12a41` trong cấu hình Tailwind + biến CSS
+- [x] Nạp bộ icon (Lucide hoặc Heroicons)
+- [x] Tạo `index.html` rỗng và xác nhận mở được trên trình duyệt, không lỗi console
 
 ## Phase 2: Core UI (giao diện tĩnh)
-- [ ] Header: logo Tingee + tên trang
+- [x] Header: logo Tingee + tên trang
 - [ ] Layout 3 cột: sidebar trái + nội dung giữa + mục lục (TOC) phải
 - [ ] Sidebar điều hướng (markup tĩnh trước): nhóm Tingee + Bảo Kim + OnePay + Payoo
 - [ ] Khu vực nội dung mẫu: heading, đoạn văn, list, bảng, code block, callout
