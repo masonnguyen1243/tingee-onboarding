@@ -31,11 +31,11 @@ Mỗi phase làm tuần tự, một task một lần. Sau mỗi task: cập nh�
 - [ ] (Khi có) thay placeholder bằng nội dung thật do chủ dự án cung cấp
 
 ## Phase 4: Connect UI to Data (render từ dữ liệu)
-- [ ] Render sidebar điều hướng từ dữ liệu (thay markup tĩnh ở Phase 2)
-- [ ] Render khu vực nội dung từ dữ liệu (heading/section theo đúng `id`)
-- [ ] Render TOC từ dữ liệu/section hiện có
-- [ ] Anchor link: click sidebar / TOC cuộn mượt tới đúng section; URL có `#section`
-- [ ] Scroll spy: TOC highlight section đang xem khi cuộn
+- [x] Render sidebar điều hướng từ dữ liệu (thay markup tĩnh ở Phase 2)
+- [x] Render khu vực nội dung từ dữ liệu (heading/section theo đúng `id`)
+- [x] Render TOC từ dữ liệu/section hiện có
+- [x] Anchor link: click sidebar / TOC cuộn mượt tới đúng section; URL có `#section`
+- [x] Scroll spy: TOC highlight section đang xem khi cuộn
 - [ ] (Tuỳ chọn) ô filter/tìm kiếm đơn giản lọc sidebar theo dữ liệu
 - [ ] (Tuỳ chọn) nút copy cho code block
 
