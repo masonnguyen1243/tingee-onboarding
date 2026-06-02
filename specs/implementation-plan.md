@@ -16,12 +16,12 @@ Mỗi phase làm tuần tự, một task một lần. Sau mỗi task: cập nh�
 
 ## Phase 2: Core UI (giao diện tĩnh)
 - [x] Header: logo Tingee + tên trang
-- [ ] Layout 3 cột: sidebar trái + nội dung giữa + mục lục (TOC) phải
-- [ ] Sidebar điều hướng (markup tĩnh trước): nhóm Tingee + Bảo Kim + OnePay + Payoo
-- [ ] Khu vực nội dung mẫu: heading, đoạn văn, list, bảng, code block, callout
-- [ ] TOC bên phải (tĩnh trước)
-- [ ] Responsive: sidebar thu gọn + menu mobile (đóng/mở)
-- [ ] Áp đúng logo + mã màu brand của 4 đối tác (Tingee, Bảo Kim, OnePay, Payoo)
+- [x] Layout 3 cột: sidebar trái + nội dung giữa + mục lục (TOC) phải
+- [x] Sidebar điều hướng (markup tĩnh trước): nhóm Tingee + Bảo Kim + OnePay + Payoo
+- [x] Khu vực nội dung mẫu: heading, đoạn văn, list, bảng, code block, callout
+- [x] TOC bên phải (tĩnh trước)
+- [x] Responsive: sidebar thu gọn + menu mobile (đóng/mở)
+- [x] Áp đúng logo + mã màu brand của 4 đối tác (Tingee, Bảo Kim, OnePay, Payoo)
 
 ## Phase 3: Core Data Logic (mô hình nội dung)
 - [ ] Định nghĩa cấu trúc dữ liệu nội dung trong JS (vd `js/data.js`): danh sách đối tác → các section → heading/anchor

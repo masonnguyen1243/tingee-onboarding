@@ -1,71 +1,619 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tingee Onboarding Docs</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tingee Onboarding Docs</title>
 
-  <!-- Font tiếng Việt: Be Vietnam Pro -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <!-- Font tiếng Việt: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- TailwindCSS qua CDN (MVP, không cần build step) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Cấu hình Tailwind: màu chính + font dự án
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "#e12a41",
-          },
-          fontFamily: {
-            sans: ["Be Vietnam Pro", "Inter", "system-ui", "sans-serif"],
+    <!-- TailwindCSS qua CDN (MVP, không cần build step) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e12a41",
+            },
+            fontFamily: {
+              sans: ["Be Vietnam Pro", "Inter", "system-ui", "sans-serif"],
+            },
           },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <!-- CSS dự án (biến màu, base styles) -->
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
+    <!-- CSS dự án (biến màu, base styles) -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
 
-<body class="font-sans text-slate-800 antialiased bg-slate-50">
-  <!--
-    Phase 2 (task 1) — Header: logo Tingee + tên trang.
-    Layout 3 cột / sidebar / nội dung / TOC sẽ làm ở các task sau.
-  -->
-  <header class="sticky top-0 z-30 bg-white border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-3">
-      <!--
-        LOGO TINGEE — PLACEHOLDER.
-        Thay monogram bên dưới bằng file logo chính thức (SVG/PNG) khi có asset thật.
-      -->
-      <a href="#" class="flex items-center gap-2.5" aria-label="Tingee — Trang tài liệu onboarding">
-        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-white font-bold leading-none">
-          T
-        </span>
-        <span class="text-lg font-bold text-slate-900">Tingee</span>
-      </a>
-      <span class="hidden sm:block w-px h-6 bg-slate-200" aria-hidden="true"></span>
-      <span class="hidden sm:block text-slate-500 font-medium">Onboarding Docs</span>
+  <body class="font-sans text-slate-800 antialiased bg-slate-50">
+    <!-- HEADER: sticky, full width -->
+    <header
+      class="sticky top-0 z-30 bg-white border-b border-slate-200 h-16 flex items-center"
+    >
+      <div
+        class="w-full max-w-[90rem] mx-auto px-4 sm:px-6 flex items-center gap-3"
+      >
+        <a
+          href="#"
+          class="flex items-center gap-2.5"
+          aria-label="Tingee — Trang tài liệu onboarding"
+        >
+          <img
+            src="https://developers.tingee.vn/img/logo_heno.png"
+            alt="Tingee"
+            class="h-8 w-auto object-contain"
+          />
+        </a>
+        <span
+          class="hidden sm:block w-px h-6 bg-slate-200"
+          aria-hidden="true"
+        ></span>
+        <span class="hidden sm:block text-slate-500 font-medium text-sm"
+          >Onboarding Docs</span
+        >
+
+        <!-- Hamburger: visible on mobile/tablet, hidden on desktop -->
+        <button
+          id="menu-toggle"
+          class="lg:hidden ml-auto p-2 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+          aria-label="Mở menu điều hướng"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Backdrop: shown behind sidebar on mobile when open -->
+    <div
+      id="sidebar-backdrop"
+      class="fixed inset-0 top-16 z-30 bg-black/40 hidden"
+      aria-hidden="true"
+    ></div>
+
+    <!-- PAGE BODY: 3-column layout -->
+    <div class="relative max-w-[90rem] mx-auto flex">
+      <!-- LEFT SIDEBAR: sticky, scrollable, hidden on mobile/tablet -->
+      <aside
+        id="sidebar"
+        class="w-64 shrink-0 overflow-y-auto border-r border-slate-200 bg-white"
+      >
+        <!-- Close button: only shown on mobile -->
+        <div
+          class="flex items-center justify-between px-3 py-2.5 border-b border-slate-100 lg:hidden"
+        >
+          <span class="text-sm font-semibold text-slate-700">Điều hướng</span>
+          <button
+            id="sidebar-close"
+            class="p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+            aria-label="Đóng menu"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <nav
+          id="sidebar-nav"
+          class="p-3 text-sm"
+          aria-label="Điều hướng tài liệu"
+        >
+          <!-- ── TINGEE ─────────────────────────────── -->
+          <div class="my-4">
+            <ul class="space-y-0.5">
+              <li>
+                <a
+                  href="#tingee-tong-quan"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md font-medium bg-red-50 text-primary transition-colors duration-150"
+                >
+                  Tổng quan
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#tingee-onboarding"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Hướng dẫn onboarding
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#tingee-tai-khoan"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Cấu hình tài khoản
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <hr class="my-3 border-slate-100" />
+
+          <!-- ── BẢO KIM ─────────────────────────────── -->
+          <div class="mb-4">
+            <div class="flex items-center gap-2 px-2 py-1 mb-0.5">
+              <img
+                src="https://baokim.vn/new_base/images/logo_slogan.png"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto max-w-[4rem] object-contain"
+              />
+              <span
+                class="text-[11px] font-bold uppercase tracking-widest text-slate-400"
+                >Bảo Kim</span
+              >
+            </div>
+            <ul class="space-y-0.5">
+              <li>
+                <a
+                  href="#baokim-tong-quan"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tổng quan
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#baokim-tich-hop"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tích hợp thanh toán
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#baokim-callback"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Xử lý callback
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <hr class="my-3 border-slate-100" />
+
+          <!-- ── ONEPAY ─────────────────────────────── -->
+          <div class="mb-4">
+            <div class="flex items-center gap-2 px-2 py-1 mb-0.5">
+              <img
+                src="https://www.onepay.vn/wp-content/uploads/2022/01/Logo_OnePay.svg"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto max-w-[4rem] object-contain"
+              />
+              <span
+                class="text-[11px] font-bold uppercase tracking-widest text-slate-400"
+                >OnePay</span
+              >
+            </div>
+            <ul class="space-y-0.5">
+              <li>
+                <a
+                  href="#onepay-tong-quan"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tổng quan
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#onepay-tich-hop"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tích hợp
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#onepay-kiem-thu"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Kiểm thử
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <hr class="my-3 border-slate-100" />
+
+          <!-- ── PAYOO ─────────────────────────────── -->
+          <div class="mb-4">
+            <div class="flex items-center gap-2 px-2 py-1 mb-0.5">
+              <img
+                src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/payoo-logo-inkythuatso-02-15-52-28.jpg"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto max-w-[4rem] object-contain"
+              />
+              <span
+                class="text-[11px] font-bold uppercase tracking-widest text-slate-400"
+                >Payoo</span
+              >
+            </div>
+            <ul class="space-y-0.5">
+              <li>
+                <a
+                  href="#payoo-tong-quan"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tổng quan
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#payoo-tich-hop"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Tích hợp
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#payoo-kiem-thu"
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors duration-150"
+                >
+                  Kiểm thử
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- MAIN + TOC wrapper -->
+      <div class="flex flex-1 min-w-0">
+        <!-- MAIN CONTENT -->
+        <main id="content" class="flex-1 min-w-0 px-6 sm:px-10 py-10 max-w-3xl">
+          <!-- Breadcrumb -->
+          <nav
+            class="flex items-center gap-1.5 text-xs text-slate-400 mb-7"
+            aria-label="Breadcrumb"
+          >
+            <span>Tài liệu</span>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <span class="text-primary font-medium">Tingee</span>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <span class="text-slate-600 font-medium">Tổng quan</span>
+          </nav>
+
+          <article
+            class="prose prose-slate max-w-none prose-headings:scroll-mt-20 prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:before:content-none prose-code:after:content-none prose-code:bg-slate-100 prose-code:text-slate-800 prose-code:text-[0.85em] prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-code:font-medium prose-pre:p-0 prose-pre:bg-transparent prose-pre:rounded-none prose-pre:my-0"
+          >
+            <!-- ── H1 ── -->
+            <h1 id="tingee-tong-quan">Tổng quan về Tingee</h1>
+
+            <p>
+              <strong>Tingee</strong> là nền tảng thanh toán tích hợp giúp
+              merchant kết nối với nhiều cổng thanh toán — Bảo Kim, OnePay,
+              Payoo — thông qua một API duy nhất, đơn giản hoá quy trình tích
+              hợp và quản lý giao dịch.
+              <em
+                >[NỘI DUNG CHỜ CẬP NHẬT — thay bằng mô tả chính thức khi có]</em
+              >
+            </p>
+
+            <!-- Callout: info -->
+            <div
+              class="not-prose flex gap-3 p-4 rounded-lg bg-blue-50 border-l-4 border-blue-400 my-6 text-sm"
+            >
+              <i
+                data-lucide="info"
+                class="w-4.5 h-4.5 text-blue-500 shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <p class="font-semibold text-blue-800 mb-0.5">Thông tin</p>
+                <p class="text-blue-700">
+                  Trang tài liệu này đang trong quá trình xây dựng. Nội dung chi
+                  tiết sẽ được cập nhật sau khi có tài liệu chính thức từ chủ dự
+                  án.
+                </p>
+              </div>
+            </div>
+
+            <!-- ── H2 + paragraph + unordered list ── -->
+            <h2 id="tingee-la-gi">Tingee là gì?</h2>
+            <p>
+              Placeholder — mô tả ngắn về sản phẩm Tingee, vị trí trong hệ sinh
+              thái thanh toán Việt Nam và lợi ích cốt lõi dành cho merchant.
+            </p>
+            <ul>
+              <li>Một API tích hợp nhiều cổng thanh toán</li>
+              <li>Đối soát giao dịch tự động, giảm sai sót thủ công</li>
+              <li>Dashboard quản lý giao dịch thời gian thực</li>
+              <li>Môi trường Sandbox cho phép kiểm thử độc lập</li>
+              <li>Hỗ trợ kỹ thuật 24/7</li>
+            </ul>
+
+            <!-- ── H2 + table ── -->
+            <h2 id="tingee-tinh-nang">Các tính năng chính</h2>
+            <p>
+              Bảng dưới đây liệt kê các tính năng trong phạm vi MVP.
+              <em>[Cập nhật theo tài liệu chính thức]</em>
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Tính năng</th>
+                  <th>Mô tả</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Đa cổng thanh toán</td>
+                  <td>Kết nối Bảo Kim, OnePay, Payoo qua một API</td>
+                  <td>
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700"
+                      >Sẵn sàng</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>Webhook / Callback</td>
+                  <td>Nhận thông báo realtime khi có giao dịch</td>
+                  <td>
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700"
+                      >Sẵn sàng</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sandbox / Test</td>
+                  <td>Môi trường kiểm thử độc lập với production</td>
+                  <td>
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700"
+                      >Sẵn sàng</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>[Tính năng chờ cập nhật]</td>
+                  <td>[NỘI DUNG CHỜ CẬP NHẬT]</td>
+                  <td>
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500"
+                      >Chờ</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- ── H2 + ordered list ── -->
+            <h2 id="tingee-onboarding">Các bước onboarding</h2>
+            <ol>
+              <li>
+                <strong>Đăng ký tài khoản merchant</strong> — Điền form đăng ký
+                trên portal Tingee và xác nhận email.
+              </li>
+              <li>
+                <strong>Xác thực danh tính (KYC)</strong> — Cung cấp giấy tờ
+                pháp lý theo yêu cầu.
+              </li>
+              <li>
+                <strong>Cấu hình cổng thanh toán</strong> — Chọn và kích hoạt
+                Bảo Kim / OnePay / Payoo trong dashboard.
+              </li>
+              <li>
+                <strong>Kiểm thử trên Sandbox</strong> — Dùng API key sandbox để
+                chạy giao dịch thử, kiểm tra callback.
+              </li>
+              <li>
+                <strong>Chuyển sang Production</strong> — Thay API key
+                production và thực hiện go-live.
+              </li>
+            </ol>
+
+            <!-- Callout: warning -->
+            <div
+              class="not-prose flex gap-3 p-4 rounded-lg bg-amber-50 border-l-4 border-amber-400 my-6 text-sm"
+            >
+              <i
+                data-lucide="triangle-alert"
+                class="w-4.5 h-4.5 text-amber-500 shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <p class="font-semibold text-amber-800 mb-0.5">Cảnh báo</p>
+                <p class="text-amber-700">
+                  API key
+                  <code
+                    class="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono"
+                    >production</code
+                  >
+                  và
+                  <code
+                    class="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono"
+                    >sandbox</code
+                  >
+                  hoàn toàn khác nhau. Không dùng key production trong môi
+                  trường kiểm thử để tránh phát sinh giao dịch thật.
+                </p>
+              </div>
+            </div>
+
+            <!-- ── H2 + code block ── -->
+            <h2 id="tingee-vi-du-api">Ví dụ khởi tạo thanh toán</h2>
+            <p>
+              Gửi <code>POST</code> request tới endpoint Tingee với body JSON
+              như sau:
+            </p>
+          </article>
+
+          <!-- Code block — dark, nằm ngoài prose để tự do về style -->
+          <div
+            class="not-prose my-4 rounded-xl overflow-hidden border border-slate-800 text-sm"
+          >
+            <div
+              class="flex items-center justify-between px-4 py-2 bg-slate-800 text-slate-400 text-xs"
+            >
+              <span class="font-medium"
+                >JSON — Request khởi tạo thanh toán</span
+              >
+              <button
+                class="hover:text-white transition-colors duration-150"
+                title="Sao chép"
+                aria-label="Sao chép code"
+              >
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <pre
+              class="bg-slate-900 text-slate-100 p-5 overflow-x-auto leading-relaxed"
+            ><code>{
+  "merchant_id": "YOUR_MERCHANT_ID",
+  "api_key":     "YOUR_API_KEY",
+  "amount":      100000,
+  "currency":    "VND",
+  "gateway":     "baokim",
+  "order_id":    "ORD-2024-001",
+  "description": "Thanh toán đơn hàng #001",
+  "return_url":  "https://your-site.com/payment/callback",
+  "cancel_url":  "https://your-site.com/payment/cancel"
+}</code></pre>
+          </div>
+
+          <article
+            class="prose prose-slate max-w-none prose-headings:scroll-mt-20 prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:before:content-none prose-code:after:content-none prose-code:bg-slate-100 prose-code:text-slate-800 prose-code:text-[0.85em] prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-code:font-medium"
+          >
+            <!-- Callout: tip/success -->
+            <div
+              class="not-prose flex gap-3 p-4 rounded-lg bg-green-50 border-l-4 border-green-400 my-6 text-sm"
+            >
+              <i
+                data-lucide="circle-check"
+                class="w-4.5 h-4.5 text-green-500 shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <p class="font-semibold text-green-800 mb-0.5">Mẹo</p>
+                <p class="text-green-700">
+                  Dùng môi trường <strong>Sandbox</strong> để kiểm thử toàn bộ
+                  luồng thanh toán — bao gồm cả callback / webhook — trước khi
+                  go-live. Xem hướng dẫn tại
+                  <a href="#tingee-tai-khoan" class="underline font-medium"
+                    >Cấu hình tài khoản</a
+                  >.
+                </p>
+              </div>
+            </div>
+
+            <!-- Callout: important (primary brand color) -->
+            <div
+              class="not-prose flex gap-3 p-4 rounded-lg bg-red-50 border-l-4 border-primary my-6 text-sm"
+            >
+              <i
+                data-lucide="megaphone"
+                class="w-4.5 h-4.5 text-primary shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <p class="font-semibold text-red-800 mb-0.5">Quan trọng</p>
+                <p class="text-red-700">
+                  [NỘI DUNG CHỜ CẬP NHẬT] — Các lưu ý quan trọng do chủ dự án
+                  cung cấp sẽ được đặt ở đây.
+                </p>
+              </div>
+            </div>
+
+            <!-- ── H2 + cấu hình tài khoản (placeholder section) ── -->
+            <h2 id="tingee-tai-khoan">Cấu hình tài khoản</h2>
+            <p>
+              [NỘI DUNG CHỜ CẬP NHẬT] — Hướng dẫn cấu hình tài khoản merchant
+              trên portal Tingee, bao gồm thiết lập webhook, quản lý API key và
+              phân quyền người dùng.
+            </p>
+          </article>
+        </main>
+
+        <!-- RIGHT TOC: sticky, scrollable, only on xl+ -->
+        <aside
+          id="toc"
+          class="sticky top-16 h-[calc(100vh-4rem)] w-56 shrink-0 overflow-y-auto hidden xl:block border-l border-slate-100"
+        >
+          <div class="py-8 px-4 text-[13px]">
+            <p
+              class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-4 px-3"
+            >
+              Trên trang này
+            </p>
+
+            <!-- TOC links — indicator rail dùng border-l trên ul, active item overlay bằng border-l-2 -->
+            <nav aria-label="Mục lục trang">
+              <ul class="border-l border-slate-200 space-y-0.5">
+                <!-- H1 — active (đầu trang) -->
+                <li>
+                  <a
+                    href="#tingee-tong-quan"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-primary text-primary font-medium leading-snug transition-colors duration-150"
+                  >
+                    Tổng quan về Tingee
+                  </a>
+                </li>
+
+                <!-- H2 items -->
+                <li>
+                  <a
+                    href="#tingee-la-gi"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 leading-snug transition-colors duration-150"
+                  >
+                    Tingee là gì?
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#tingee-tinh-nang"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 leading-snug transition-colors duration-150"
+                  >
+                    Các tính năng chính
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#tingee-onboarding"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 leading-snug transition-colors duration-150"
+                  >
+                    Các bước onboarding
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#tingee-vi-du-api"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 leading-snug transition-colors duration-150"
+                  >
+                    Ví dụ khởi tạo thanh toán
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#tingee-tai-khoan"
+                    class="block py-1.5 pl-4 -ml-px border-l-2 border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 leading-snug transition-colors duration-150"
+                  >
+                    Cấu hình tài khoản
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      </div>
     </div>
-  </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-    <p class="text-slate-400">
-      [NỘI DUNG CHỜ CẬP NHẬT] — layout 3 cột và nội dung tài liệu sẽ được thêm ở các task tiếp theo của Phase 2.
-    </p>
-  </main>
-
-  <!-- Icon: Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- JS dự án -->
-  <script src="js/main.js"></script>
-</body>
+    <!-- Icon: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- JS dự án -->
+    <script src="js/main.js"></script>
+  </body>
 </html>
