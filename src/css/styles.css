@@ -1,0 +1,13 @@
+/* Phase 1 — biến & base styles dự án.
+   Màu chính dùng nhất quán cho nút, link active, điểm nhấn. */
+:root {
+  --color-primary: #e12a41;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Be Vietnam Pro", "Inter", system-ui, sans-serif;
+}

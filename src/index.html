@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tingee Onboarding Docs</title>
+
+  <!-- Font tiếng Việt: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- TailwindCSS qua CDN (MVP, không cần build step) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Cấu hình Tailwind: màu chính + font dự án
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#e12a41",
+          },
+          fontFamily: {
+            sans: ["Be Vietnam Pro", "Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- CSS dự án (biến màu, base styles) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="font-sans text-slate-800 antialiased">
+  <!--
+    Phase 1 — Project Setup.
+    Trang này chỉ để xác nhận môi trường đã sẵn sàng (Tailwind, font, màu, icon).
+    Chưa có business feature (sidebar / nội dung / TOC) — sẽ làm ở Phase 2 trở đi.
+  -->
+  <main class="min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full text-center space-y-4">
+      <div
+        class="mx-auto w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center"
+      >
+        <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+      </div>
+      <h1 class="text-2xl font-semibold">Tingee Onboarding Docs</h1>
+      <p class="text-slate-500">
+        Project setup (Phase 1) hoàn tất — Tailwind, font tiếng Việt, màu chính
+        <span class="font-medium text-primary">#e12a41</span> và icon đã nạp.
+      </p>
+      <p class="text-sm text-slate-400">
+        Nội dung tài liệu sẽ được thêm từ Phase 2.
+      </p>
+    </div>
+  </main>
+
+  <!-- Icon: Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- JS dự án -->
+  <script src="js/main.js"></script>
+</body>
+</html>
